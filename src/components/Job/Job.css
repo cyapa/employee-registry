@@ -1,0 +1,31 @@
+.job-container{
+
+    background-color: rgb(26, 83, 131);
+    padding: 0.1em;
+    border-radius: 20px; 
+    width: 50%;
+    left: 55em;
+    position: relative;
+  
+}
+
+.job-container h2{
+   
+    color:rgb(243, 241, 241);
+    font-size: 1.2em;
+    font-family:sans-serif;
+  
+}
+.job-pic-container{
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    position: absolute;
+    
+}
+
+.job-pic-container img{
+    margin-top: 1em;
+    width: 4em;
+    height: 4em;
+}

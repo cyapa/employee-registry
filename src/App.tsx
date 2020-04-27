@@ -1,24 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect,useState} from 'react';
 import './App.css';
+import "./components/Employee"
+import { Employee } from './components/Employee';
+// import {IEmployee} from "./interfaces/Employee/IEmployee";
+import { AddEmployee } from './components/AddEmployee/AddEmployee';
 
-function App() {
+import employeeStore from './store/employee'
+
+
+
+ const App =() => {
+   
+  //const [data,setData] = useState<IEmployee[]>([{Name:'',Age:0,Job:{Title:'',Location:''},Profile:{URL:''}}]);
+
+  const [employeeState,setEmployeeState] = useState(
+    {
+     data: [
+      {
+      Name:'AppDefault',Age:0,
+      Job:{Title:'',Location:''},
+      Profile:{URL:''}
+      }
+    ]
+  }
+  );
+
+  useEffect(() => {
+    employeeStore.init()  
+  },[]);
+
+
+  useEffect(() => {
+    
+    employeeStore.subscribe(setEmployeeState);
+    console.log(employeeState.data)
+
+  },[employeeState.data]);
+
+
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Employee Registry</h1>
+      {
+      employeeState.data.map((employee,i)=>(
+          <Employee key={i} Name={employee.Name} Age={employee.Age} Job={employee.Job} Profile={employee.Profile}></Employee> 
+        ))     
+      }
+      <div className="form-container">
+        <AddEmployee></AddEmployee>
+    
+
+      </div>
     </div>
   );
 }
